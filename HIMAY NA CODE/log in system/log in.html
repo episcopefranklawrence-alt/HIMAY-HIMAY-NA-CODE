@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUGRAM — Auth System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+  <div id="auth-screen" class="screen active">
+    <div class="auth-bg">
+      <div class="auth-bg-grid"></div>
+      <div class="auth-orb auth-orb-1"></div>
+      <div class="auth-orb auth-orb-2"></div>
+    </div>
+    
+    <div class="auth-container">
+      <div class="auth-brand">
+        <div class="brand-mark">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <rect width="36" height="36" rx="10" fill="#1a3a5c"/>
+            <path d="M8 26L18 10L28 26H8Z" fill="#c9a84c" opacity="0.9"/>
+            <path d="M13 26L18 17L23 26H13Z" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">EDUGRAM</span>
+          <span class="brand-tagline">Academic Writing System</span>
+        </div>
+      </div>
+
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Sign In</button>
+          <button class="auth-tab" data-tab="register">Register</button>
+        </div>
+
+        <div id="login-form" class="auth-form active">
+          <div class="form-header">
+            <h2>Welcome back</h2>
+            <p>Enter your credentials to access EDUGRAM</p>
+          </div>
+          <div class="field-group">
+            <label>Email Address</label>
+            <input type="email" id="login-email" placeholder="you@institution.edu" />
+          </div>
+          <div class="field-group">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="••••••••" />
+          </div>
+          <div class="role-selector">
+            <label for="role-select">Sign in as</label>
+            <div class="role-dropdown-wrap">
+              <select id="role-select" name="role" class="role-dropdown">
+                <option value="" disabled selected>Choose your role…</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+              </select>
+              <span class="role-dropdown-arrow">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </span>
+            </div>
+          </div>
+          <div id="login-error" class="form-error hidden"></div>
+          <button class="btn-primary" id="login-btn">Sign In</button>
+          
+          <div class="demo-hint">
+            <span>Demo accounts:</span>
+            <button class="demo-btn" data-email="student@edugram.edu" data-pass="student123" data-role="student">Student Demo</button>
+            <button class="demo-btn" data-email="teacher@edugram.edu" data-pass="teacher123" data-role="teacher">Teacher Demo</button>
+          </div>
+        </div>
+
+        <div id="register-form" class="auth-form">
+          <div class="form-header">
+            <h2>Create account</h2>
+            <p>Join EDUGRAM as a student or teacher</p>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label>First Name</label>
+              <input type="text" id="reg-first" placeholder="First" />
+            </div>
+            <div class="field-group">
+              <label>Last Name</label>
+              <input type="text" id="reg-last" placeholder="Last" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Institutional Email</label>
+            <input type="email" id="reg-email" placeholder="you@institution.edu" />
+          </div>
+          <div class="field-group">
+            <label>Student/Employee ID</label>
+            <input type="text" id="reg-id" placeholder="e.g. 2024-00123" />
+          </div>
+          <div class="field-group">
+            <label>Password</label>
+            <input type="password" id="reg-password" placeholder="Min. 8 characters" />
+          </div>
+          <div class="role-selector">
+            <label for="reg-role-select">Registering as</label>
+            <div class="role-dropdown-wrap">
+              <select id="reg-role-select" name="role" class="role-dropdown">
+                <option value="" disabled selected>Choose your role…</option>
+                <option value="student">🎓 Student</option>
+                <option value="teacher">🖥️ Teacher</option>
+              </select>
+              <span class="role-dropdown-arrow">
+                <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+              </span>
+            </div>
+          </div>
+          <div id="register-error" class="form-error hidden"></div>
+          <div id="register-success" class="form-success hidden"></div>
+          <button class="btn-primary" id="register-btn">Create Account</button>
+        </div>
+      </div>
+
+      <p class="auth-footer">© 2026 EDUGRAM · Academic Writing & Submission System</p>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
