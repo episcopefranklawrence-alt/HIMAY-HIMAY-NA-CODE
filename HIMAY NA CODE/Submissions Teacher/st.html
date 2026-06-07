@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUGRAM — Student Submissions Review Panel</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="st.css" />
+</head>
+<body>
+
+  <div class="panel active" id="t-submissions">
+    <div class="panel-content">
+      <div class="section-header">
+        <h2>Student Submissions</h2>
+        <div class="filter-row">
+          <button class="filter-btn active" data-tfilter="all">All</button>
+          <button class="filter-btn" data-tfilter="pending">Pending</button>
+          <button class="filter-btn" data-tfilter="graded">Graded</button>
+        </div>
+      </div>
+      
+      <div id="submissions-list"></div>
+
+      <div id="feedback-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-box">
+          <div class="modal-header">
+            <h3>Review Submission</h3>
+            <button class="modal-close" id="modal-close">✕</button>
+          </div>
+          <div class="modal-body">
+            
+            <div class="submission-preview">
+              <div class="preview-meta">
+                <span><strong>Student:</strong> <span id="modal-student"></span></span>
+                <span><strong>Assignment:</strong> <span id="modal-assignment"></span></span>
+                <span><strong>Submitted:</strong> <span id="modal-submitted"></span></span>
+              </div>
+              <div class="preview-text" id="modal-text"></div>
+            </div>
+
+            <div class="feedback-input-area">
+              <label>Your Feedback (Visible to Student)</label>
+              <textarea id="modal-feedback-text" rows="5" placeholder="Write detailed feedback for the student…"></textarea>
+              
+              <div class="private-note-area">
+                <label>Private Note (Visible only to you)</label>
+                <textarea id="modal-private-note" rows="3" placeholder="Internal notes, grading justifications, etc."></textarea>
+              </div>
+              
+              <div class="grade-row">
+                <label>Grade / Score</label>
+                <input type="text" id="modal-grade" placeholder="e.g. 88/100 or A-" />
+              </div>
+              
+              <div class="feedback-tags">
+                <span class="ftag-label">Quick tags:</span>
+                <button class="ftag" data-tag="Good introduction">Good introduction</button>
+                <button class="ftag" data-tag="Needs more evidence">Needs more evidence</button>
+                <button class="ftag" data-tag="Excellent argument">Excellent argument</button>
+                <button class="ftag" data-tag="Work on transitions">Work on transitions</button>
+                <button class="ftag" data-tag="Strong conclusion">Strong conclusion</button>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn-secondary" id="modal-cancel">Cancel</button>
+            <button class="btn-primary" id="modal-submit-feedback">Submit Feedback</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="st.js"></script>
+</body>
+</html>

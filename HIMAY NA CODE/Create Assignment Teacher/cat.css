@@ -1,0 +1,101 @@
+/* ── Design System Variables & Tokens ── */
+:root {
+  --navy:       #1a3a5c;
+  --navy-dark:  #0f2339;
+  --navy-mid:   #234a73;
+  --gold:       #c9a84c;
+  --cream:      #fafaf7;
+  --white:      #ffffff;
+  --gray-50:    #f8f9fa;
+  --gray-100:   #f1f3f5;
+  --gray-200:   #e5e7eb;
+  --gray-500:   #6b7280;
+  --gray-600:   #4b5563;
+  --gray-800:   #1f2937;
+  --red:        #dc2626;
+  --red-light:  #fef2f2;
+  --red-mid:    #fee2e2;
+  --green:      #16a34a;
+  --green-light:#f0fdf4;
+  
+  --radius:     10px;
+  --radius-sm:  6px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --transition: 200ms ease;
+}
+
+/* ── Global Document Reset Normalization ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--gray-800);
+  line-height: 1.6;
+  padding: 2.5rem 1.5rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { cursor: pointer; font-family: var(--font-sans); border: none; background: none; }
+input, textarea, select {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+  width: 100%;
+  background: white;
+  color: var(--gray-800);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(26,58,92,.12);
+}
+textarea { resize: vertical; }
+label { font-size: 0.82rem; font-weight: 600; color: var(--gray-600); letter-spacing: .03em; text-transform: uppercase; display: block; margin-bottom: .4rem; }
+
+/* ── Layout Component Canvas Panels ── */
+.panel { display: block; max-width: 1100px; margin: 0 auto; }
+.panel-content { padding: 1.5rem; display: flex; flex-direction: column; align-items: center; }
+
+.section-header { width: 100%; max-width: 700px; margin-bottom: 1.25rem; }
+.section-header h2 { font-family: var(--font-serif); font-size: 1.5rem; color: var(--navy); }
+
+/* ── Card Framework Components Layout ── */
+.card { background: white; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1.5px solid var(--gray-100); overflow: hidden; width: 100%; }
+.create-form-wrap { max-width: 700px; width: 100%; }
+.create-form-card { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.field-group { display: flex; flex-direction: column; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ── Interactive Input Form Control Buttons ── */
+.btn-primary {
+  background: var(--navy); color: white; padding: .75rem 1.5rem; border-radius: 8px;
+  font-size: .92rem; font-weight: 600; transition: all var(--transition); letter-spacing: .01em;
+}
+.btn-primary:hover { background: var(--navy-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,58,92,.3); }
+
+.btn-secondary {
+  background: var(--gray-100); color: var(--gray-700); padding: .75rem 1.5rem; border-radius: 8px;
+  font-size: .92rem; font-weight: 600; transition: all var(--transition);
+}
+.btn-secondary:hover { background: var(--gray-200); }
+
+.form-actions { display: flex; justify-content: flex-end; gap: .75rem; padding-top: .5rem; }
+
+/* ── Alert Response Callout Elements ── */
+.form-error { background: var(--red-light); color: var(--red); padding: .6rem .85rem; border-radius: 6px; font-size: .83rem; border: 1px solid var(--red-mid); }
+.form-success { background: var(--green-light); color: var(--green); padding: .6rem .85rem; border-radius: 6px; font-size: .83rem; border: 1px solid #bbf7d0; }
+.hidden { display: none !important; }
+
+/* ── Media Screen Breakpoints Override ── */
+@media (max-width: 768px) {
+  .field-row { grid-template-columns: 1fr; }
+  body { padding: 1rem .5rem; }
+  .panel-content { padding: 0.5rem; }
+  .form-actions { flex-direction: column-reverse; }
+  .form-actions button { width: 100%; }
+}

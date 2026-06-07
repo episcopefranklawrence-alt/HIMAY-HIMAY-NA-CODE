@@ -1,0 +1,104 @@
+/* ── Variables & Design Tokens ── */
+:root {
+  --navy:       #1a3a5c;
+  --navy-dark:  #0f2339;
+  --navy-mid:   #234a73;
+  --gold:       #c9a84c;
+  --gold-light: #e8c97a;
+  --cream:      #fafaf7;
+  --white:      #ffffff;
+  --gray-50:    #f8f9fa;
+  --gray-100:   #f1f3f5;
+  --gray-200:   #e5e7eb;
+  --gray-500:   #6b7280;
+  --gray-600:   #4b5563;
+  --gray-800:   #1f2937;
+  --green:      #16a34a;
+  --green-light:#f0fdf4;
+  
+  --radius:     10px;
+  --radius-sm:  6px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --transition: 200ms ease;
+}
+
+/* ── Global Baseline Normalizations ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--gray-800);
+  line-height: 1.6;
+  padding: 2.5rem 1.5rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { cursor: pointer; font-family: var(--font-sans); border: none; background: none; }
+input {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+  width: 100%;
+  background: white;
+  color: var(--gray-800);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+input:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(26,58,92,.12);
+}
+label { font-size: 0.82rem; font-weight: 600; color: var(--gray-600); letter-spacing: .03em; text-transform: uppercase; display: block; margin-bottom: .4rem; }
+
+/* ── Canvas Panel layout framework ── */
+.panel { display: block; max-width: 1100px; margin: 0 auto; }
+.panel-content { padding: 1.5rem; display: flex; flex-direction: column; align-items: center; }
+
+.section-header { width: 100%; max-width: 560px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+.section-header h2 { font-family: var(--font-serif); font-size: 1.5rem; color: var(--navy); }
+
+/* ── Card Framework Component layout rules ── */
+.card { background: white; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1.5px solid var(--gray-100); overflow: hidden; width: 100%; }
+.create-form-card { padding: 0 !important; overflow: hidden; display: flex; flex-direction: column; gap: 1.25rem; }
+.field-group { display: flex; flex-direction: column; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ── Teacher Profile Header Jumbotron Card ── */
+.teacher-profile-header {
+  display: flex; align-items: center; gap: 1.25rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.tp-avatar {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: rgba(255,255,255,.15); border: 2px solid rgba(201,168,76,.5);
+  color: white; display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; font-weight: 700; font-family: var(--font-serif); flex-shrink: 0;
+}
+.tp-info { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+.tp-fullname { font-size: 1.15rem; font-weight: 700; color: white; font-family: var(--font-serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tp-role-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--gold-light); }
+.tp-email { font-size: .82rem; color: rgba(255,255,255,.6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── Form Control Buttons ── */
+.btn-primary {
+  background: var(--navy); color: white; padding: .75rem 1.5rem; border-radius: 8px;
+  font-size: .92rem; font-weight: 600; transition: all var(--transition); letter-spacing: .01em; width: 100%;
+}
+.btn-primary:hover { background: var(--navy-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,58,92,.3); }
+
+/* ── Response Callout Banner Alert styles ── */
+.form-success { background: var(--green-light); color: var(--green); padding: .6rem .85rem; border-radius: 6px; font-size: .83rem; border: 1px solid #bbf7d0; text-align: center; }
+.hidden { display: none !important; }
+
+/* ── Mobile Queries overrides ── */
+@media (max-width: 768px) {
+  .field-row { grid-template-columns: 1fr; }
+  body { padding: 1rem .5rem; }
+  .panel-content { padding: 0.5rem; }
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUGRAM — People Management Platform</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="pt.css" />
+</head>
+<body>
+
+  <div class="panel active" id="t-people">
+    <div class="panel-content">
+      
+      <div class="section-header">
+        <h2>People Management</h2>
+        <div style="display:flex; gap:.5rem;">
+          <button class="btn-secondary small" id="add-teacher-btn">+ Add Teacher</button>
+          <button class="btn-primary small" id="add-person-btn">+ Add Student</button>
+        </div>
+      </div>
+
+      <div class="people-controls">
+        <div class="people-search-wrap">
+          <svg class="people-search-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/></svg>
+          <input type="text" id="people-search" placeholder="Search by name, email, or ID…" class="people-search-input" />
+        </div>
+        <div class="people-filter-tabs">
+          <button class="filter-btn active" data-prole="all">All</button>
+          <button class="filter-btn" data-prole="student">Students</button>
+          <button class="filter-btn" data-prole="teacher">Teachers</button>
+        </div>
+      </div>
+
+      <div class="people-stats-row" id="people-stats-row">
+        <div class="pstat pstat-clickable" data-statfilter="all" title="Show all users"><span class="pstat-num" id="pstat-total">0</span><span class="pstat-label">Total Users</span></div>
+        <div class="pstat pstat-clickable" data-statfilter="student" title="Show students"><span class="pstat-num" id="pstat-students">0</span><span class="pstat-label">Students</span></div>
+        <div class="pstat pstat-clickable" data-statfilter="teacher" title="Show teachers"><span class="pstat-num" id="pstat-teachers">0</span><span class="pstat-label">Teachers</span></div>
+        <div class="pstat pstat-clickable" data-statfilter="submissions" title="Show users with submissions"><span class="pstat-num" id="pstat-active">0</span><span class="pstat-label">With Submissions</span></div>
+      </div>
+
+      <div class="people-grid" id="people-grid"></div>
+    </div>
+  </div>
+
+  <div id="add-person-modal" class="modal hidden">
+    <div class="modal-backdrop" id="add-person-backdrop"></div>
+    <div class="modal-box" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3 id="add-person-modal-title">Add New Student</h3>
+        <button class="modal-close" id="add-person-close">✕</button>
+      </div>
+      <div class="modal-body" style="display:flex; flex-direction:column; gap:1rem;">
+        <div class="field-row">
+          <div class="field-group">
+            <label>First Name *</label>
+            <input type="text" id="np-first" placeholder="First name" />
+          </div>
+          <div class="field-group">
+            <label>Last Name *</label>
+            <input type="text" id="np-last" placeholder="Last name" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Institutional Email *</label>
+          <input type="email" id="np-email" placeholder="student@institution.edu" />
+        </div>
+        <div class="role-selector">
+          <label for="np-role-select">Role *</label>
+          <div class="role-dropdown-wrap">
+            <select id="np-role-select" class="role-dropdown">
+              <option value="student">🎓 Student</option>
+              <option value="teacher">🖥️ Teacher</option>
+            </select>
+            <span class="role-dropdown-arrow">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label id="np-id-label">Student ID *</label>
+            <input type="text" id="np-id" placeholder="e.g. 2024-00123" />
+          </div>
+          <div class="field-group">
+            <label>Section / Year</label>
+            <input type="text" id="np-section" placeholder="e.g. BSIT-3A (optional for teachers)" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Temporary Password *</label>
+          <input type="password" id="np-pass" placeholder="Min. 8 characters" />
+        </div>
+        <div id="np-error" class="form-error hidden"></div>
+        <div id="np-success" class="form-success hidden"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="np-cancel">Cancel</button>
+        <button class="btn-primary" id="np-save">Add Person</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="view-person-modal" class="modal hidden">
+    <div class="modal-backdrop" id="view-person-backdrop"></div>
+    <div class="modal-box" style="max-width: 540px;">
+      <div class="modal-header">
+        <h3>Student Profile</h3>
+        <button class="modal-close" id="view-person-close">✕</button>
+      </div>
+      <div class="modal-body" style="display:flex; flex-direction:column; gap:1.2rem;">
+        <div class="vp-header">
+          <div class="vp-avatar" id="vp-avatar">S</div>
+          <div>
+            <div class="vp-name" id="vp-name">—</div>
+            <div class="vp-role-badge" id="vp-role-badge">Student</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>First Name</label>
+            <input type="text" id="vp-first" />
+          </div>
+          <div class="field-group">
+            <label>Last Name</label>
+            <input type="text" id="vp-last" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Email</label>
+          <input type="email" id="vp-email" />
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Student / Employee ID</label>
+            <input type="text" id="vp-sid" />
+          </div>
+          <div class="field-group">
+            <label>Section / Year</label>
+            <input type="text" id="vp-section" placeholder="e.g. BSIT-3A (optional for teachers)" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>New Password (leave blank to keep)</label>
+          <input type="password" id="vp-pass" placeholder="••••••••" />
+        </div>
+        <div class="vp-activity" id="vp-activity"></div>
+        <div id="vp-error" class="form-error hidden"></div>
+        <div id="vp-success" class="form-success hidden"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary btn-danger-outline" id="vp-delete">Remove User</button>
+        <div style="display:flex; gap:.5rem;">
+          <button class="btn-secondary" id="vp-cancel">Cancel</button>
+          <button class="btn-primary" id="vp-save">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="submissions-detail-modal" class="modal hidden">
+    <div class="modal-backdrop" id="subs-detail-backdrop"></div>
+    <div class="modal-box" style="max-width: 640px;">
+      <div class="modal-header">
+        <h3 id="subs-detail-title">Users with Submissions</h3>
+        <button class="modal-close" id="subs-detail-close">✕</button>
+      </div>
+      <div class="modal-body" style="display:flex; flex-direction:column; gap:.75rem; max-height:60vh; overflow-y:auto;">
+        <div id="subs-detail-list"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="subs-detail-cancel">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="pt.js"></script>
+</body>
+</html>

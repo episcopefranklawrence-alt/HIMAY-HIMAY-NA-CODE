@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUGRAM — Academic Writing Editor</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="wrt.css" />
+</head>
+<body>
+
+  <div class="panel active" id="s-editor">
+    <div class="panel-content editor-layout">
+      
+      <div class="editor-main">
+        <div class="editor-toolbar">
+          <div class="toolbar-left">
+            <select id="assignment-select" class="toolbar-select">
+              <option value="">— Select Assignment —</option>
+            </select>
+          </div>
+          <div class="toolbar-actions">
+            <button class="toolbar-btn" id="check-writing-btn" title="Check Writing">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              Check Writing
+            </button>
+            <button class="toolbar-btn secondary" id="save-draft-btn">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293z"/></svg>
+              Save Draft
+            </button>
+            <button class="toolbar-btn primary" id="submit-assignment-btn">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/></svg>
+              Submit
+            </button>
+          </div>
+        </div>
+
+        <div class="editor-meta" id="editor-meta">
+          <div class="meta-item"><strong>Assignment:</strong> <span id="meta-title">—</span></div>
+          <div class="meta-item"><strong>Due:</strong> <span id="meta-due">—</span></div>
+          <div class="meta-item"><strong>Min. Words:</strong> <span id="meta-words">—</span></div>
+        </div>
+
+        <div class="writing-area-wrap">
+          <div class="word-counter-bar">
+            <span class="lang-indicator">🇬🇧 English (US)</span>
+            <span id="word-count-display">0 words</span>
+          </div>
+          <div id="writing-area" class="writing-area" contenteditable="true" spellcheck="false" placeholder="Begin writing your assignment here…&#10;&#10;Select an assignment above, then start typing. Use the 'Check Writing' button to get suggestions."></div>
+          
+          <div id="submit-toast" class="submit-toast hidden">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Assignment submitted successfully!
+          </div>
+        </div>
+      </div>
+
+      <aside class="writing-assistant">
+        <div class="assistant-header">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+          Writing Assistant
+          <span class="assistant-badge">EN</span>
+        </div>
+
+        <div class="assistant-score" id="assistant-score">
+          <div class="score-ring">
+            <svg viewBox="0 0 36 36" class="score-svg">
+              <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#e5e7eb" stroke-width="3"/>
+              <path id="score-arc" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#c9a84c" stroke-width="3" stroke-dasharray="0, 100"/>
+            </svg>
+            <span class="score-num" id="score-num">—</span>
+          </div>
+          <span class="score-label">Writing Score</span>
+        </div>
+
+        <div class="assistant-sections">
+          <div class="assistant-section" id="a-errors">
+            <div class="section-title error-title">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+              Issues Found <span class="count-badge" id="error-count">0</span>
+            </div>
+            <div id="error-list" class="suggestion-list">
+              <p class="empty-hint">Click "Check Writing" to scan your text</p>
+            </div>
+          </div>
+
+          <div class="assistant-section" id="a-suggestions">
+            <div class="section-title suggest-title">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              Style Suggestions
+            </div>
+            <div id="suggestion-list" class="suggestion-list">
+              <p class="empty-hint">Suggestions appear after checking</p>
+            </div>
+          </div>
+
+          <div class="assistant-section">
+            <div class="section-title">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+              Readability
+            </div>
+            <div id="readability-panel" class="readability-panel">
+              <div class="readability-item">
+                <span>Sentences</span><span id="r-sentences">—</span>
+              </div>
+              <div class="readability-item">
+                <span>Avg. Words/Sentence</span><span id="r-avg">—</span>
+              </div>
+              <div class="readability-item">
+                <span>Reading Level</span><span id="r-level">—</span>
+              </div>
+              <div class="readability-item">
+                <span>Passive Voice</span><span id="r-passive">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <script src="wrt.js"></script>
+</body>
+</html>

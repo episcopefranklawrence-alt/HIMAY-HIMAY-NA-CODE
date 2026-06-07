@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUGRAM — Teacher Profile Panel</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="prot.css" />
+</head>
+<body>
+
+  <div class="panel active" id="t-profile">
+    <div class="panel-content">
+      <div class="section-header">
+        <h2>My Profile</h2>
+      </div>
+      <div class="card create-form-card" style="max-width:560px;">
+        <div class="teacher-profile-header">
+          <div class="tp-avatar" id="tp-avatar-display">T</div>
+          <div class="tp-info">
+            <div class="tp-fullname" id="tp-fullname-display">—</div>
+            <div class="tp-role-tag">Teacher · Faculty</div>
+            <div class="tp-email" id="tp-email-display">—</div>
+          </div>
+        </div>
+        
+        <div style="padding:1.5rem; display:flex; flex-direction:column; gap:1rem;">
+          <div class="field-row">
+            <div class="field-group">
+              <label>First Name</label>
+              <input type="text" id="profile-first" />
+            </div>
+            <div class="field-group">
+              <label>Last Name</label>
+              <input type="text" id="profile-last" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Email Address</label>
+            <input type="email" id="profile-email-display" disabled style="background:var(--gray-50); color:var(--gray-500);" />
+          </div>
+          <div class="field-group">
+            <label>Employee ID</label>
+            <input type="text" id="profile-empid-display" disabled style="background:var(--gray-50); color:var(--gray-500);" />
+          </div>
+          <div class="field-group">
+            <label>New Password (leave blank to keep current)</label>
+            <input type="password" id="profile-pass" placeholder="••••••••" />
+          </div>
+          <button class="btn-primary" id="save-profile-btn">Save Changes</button>
+          <div id="profile-toast" class="form-success hidden" style="margin-top: 0;">✓ Profile Updated!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="prot.js"></script>
+</body>
+</html>

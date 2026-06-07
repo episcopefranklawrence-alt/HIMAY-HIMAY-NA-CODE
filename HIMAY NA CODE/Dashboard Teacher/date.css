@@ -1,0 +1,308 @@
+/* ── Design System Variables & Tokens ── */
+:root {
+  --navy:       #1a3a5c;
+  --navy-dark:  #0f2339;
+  --navy-mid:   #234a73;
+  --gold:       #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-pale:  #faf5e8;
+  --cream:      #fafaf7;
+  --white:      #ffffff;
+  --gray-50:    #f8f9fa;
+  --gray-100:   #f1f3f5;
+  --gray-200:   #e5e7eb;
+  --gray-300:   #d1d5db;
+  --gray-400:   #9ca3af;
+  --gray-500:   #6b7280;
+  --gray-600:   #4b5563;
+  --gray-700:   #374151;
+  --gray-800:   #1f2937;
+  --green:      #16a34a;
+  --green-light:#f0fdf4;
+  --blue-light: #eff6ff;
+  --red:        #dc2626;
+  --red-light:  #fef2f2;
+  
+  --radius:     10px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+  --shadow:     0 4px 12px rgba(0,0,0,.10);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --transition: 200ms ease;
+}
+
+/* ── Global Baseline Document Normalizations ── */
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--gray-800);
+  line-height: 1.6;
+  padding: 2.5rem 1.5rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { 
+  cursor: pointer; 
+}
+
+/* ── Layout Framework Panels ── */
+.panel { 
+  display: block; 
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.panel-content { 
+  padding: 1.5rem; 
+}
+
+/* ── Common Card Structural Rules ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--gray-100);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1.5px solid var(--gray-100);
+}
+
+.card-header h3 { 
+  font-family: var(--font-serif); 
+  font-size: 1rem; 
+  color: var(--navy); 
+}
+
+.card-link { 
+  font-size: .8rem; 
+  color: var(--navy); 
+  font-weight: 600; 
+  opacity: .7; 
+  transition: opacity var(--transition); 
+}
+
+.card-link:hover { 
+  opacity: 1; 
+}
+
+/* ── Blue Jumbotron Welcome Banner ── */
+.welcome-banner {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  position: relative; 
+  overflow: hidden;
+}
+
+.welcome-banner::before {
+  content: '';
+  position: absolute; 
+  inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 0, transparent 50%);
+  background-size: 20px 20px;
+}
+
+.teacher-banner { 
+  background: linear-gradient(135deg, #1e3d59 0%, #2a5298 100%); 
+}
+
+.welcome-text h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem; 
+  color: white; 
+  margin-bottom: .4rem;
+}
+
+.welcome-text p { 
+  color: rgba(255,255,255,.75); 
+  font-size: .88rem; 
+}
+
+.welcome-text strong {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.welcome-art { 
+  flex-shrink: 0; 
+}
+
+/* ── Numerical Telemetry Grid Rows ── */
+.stats-row {
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: white; 
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  display: flex; 
+  align-items: center; 
+  gap: 1rem;
+  box-shadow: var(--shadow-sm); 
+  border: 1.5px solid var(--gray-100);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.stat-card:hover { 
+  transform: translateY(-2px); 
+  box-shadow: var(--shadow); 
+}
+
+.stat-icon {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 10px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon svg { 
+  width: 20px; 
+  height: 20px; 
+}
+
+.stat-icon.blue { background: var(--blue-light); color: #2563eb; }
+.stat-icon.gold { background: var(--gold-pale); color: var(--gold); }
+.stat-icon.red { background: var(--red-light); color: var(--red); }
+.stat-icon.green { background: var(--green-light); color: var(--green); }
+.stat-info { display: flex; flex-direction: column; }
+.stat-num { font-size: 1.6rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.stat-label { font-size: .75rem; color: var(--gray-400); margin-top: .2rem; }
+
+/* ── Teacher Recent Submissions Card Rows ── */
+.submission-card {
+  background: white; 
+  border-radius: var(--radius);
+  border: 1.5px solid var(--gray-100); 
+  padding: 1rem 1.25rem;
+  display: flex; 
+  align-items: center; 
+  gap: 1rem;
+  box-shadow: var(--shadow-sm); 
+  margin: .75rem 1.25rem;
+  transition: all var(--transition);
+}
+
+.submission-card:first-child { 
+  margin-top: 1.25rem; 
+}
+
+.submission-card:last-child { 
+  margin-bottom: 1.25rem; 
+}
+
+.submission-card:hover { 
+  border-color: var(--navy); 
+  box-shadow: var(--shadow); 
+}
+
+.submission-avatar {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%;
+  background: var(--navy); 
+  color: white;
+  font-weight: 700; 
+  font-size: 1rem;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.submission-info { 
+  flex: 1; 
+  min-width: 0; 
+}
+
+.submission-student { 
+  font-weight: 600; 
+  color: var(--navy); 
+  font-size: .9rem; 
+}
+
+.submission-assignment { 
+  font-size: .8rem; 
+  color: var(--gray-500); 
+}
+
+.submission-time { 
+  font-size: .75rem; 
+  color: var(--gray-400); 
+}
+
+.submission-actions { 
+  display: flex; 
+  gap: .5rem; 
+  align-items: center; 
+}
+
+.review-btn {
+  background: var(--navy); 
+  color: white;
+  padding: .45rem .9rem; 
+  border-radius: 6px;
+  font-size: .78rem; 
+  font-weight: 600;
+  transition: background var(--transition);
+}
+
+.review-btn:hover { 
+  background: var(--navy-dark); 
+}
+
+.graded-badge {
+  background: var(--green-light); 
+  color: var(--green);
+  padding: .3rem .7rem; 
+  border-radius: 6px;
+  font-size: .75rem; 
+  font-weight: 700;
+}
+
+/* ── Entrance Animation Rule Filters ── */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.panel.active { animation: fadeIn .3s ease; }
+.stat-card { animation: slideDown .35s ease both; }
+.stat-card:nth-child(2) { animation-delay: .05s; }
+.stat-card:nth-child(3) { animation-delay: .1s; }
+.stat-card:nth-child(4) { animation-delay: .15s; }
+
+/* ── Responsive Reflow Layout Override ── */
+@media (max-width: 1024px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  body { padding: 1rem .5rem; }
+  .panel-content { padding: 0.5rem; }
+  .welcome-art { display: none; }
+  .submission-card { margin: .5rem .75rem; }
+}
+
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: 1fr; }
+}
